@@ -28,20 +28,32 @@ import rs.ac.bg.fon.ps.PSCommon.communication.Receiver;
 import rs.ac.bg.fon.ps.PSCommon.communication.Request;
 import rs.ac.bg.fon.ps.PSCommon.communication.Response;
 import rs.ac.bg.fon.ps.PSCommon.communication.Sender;
-import rs.ac.bg.fon.ps.domain.Karta;
-import rs.ac.bg.fon.ps.domain.Klijent;
-import rs.ac.bg.fon.ps.domain.Predstava;
+import rs.ac.bg.fon.ps.PSCommon.domain.Karta;
+import rs.ac.bg.fon.ps.PSCommon.domain.Klijent;
+import rs.ac.bg.fon.ps.PSCommon.domain.Predstava;
 
-import rs.ac.bg.fon.ps.domain.Rezervacija;
-import rs.ac.bg.fon.ps.domain.StavkaRezervacije;
+import rs.ac.bg.fon.ps.PSCommon.domain.Rezervacija;
+import rs.ac.bg.fon.ps.PSCommon.domain.StavkaRezervacije;
 import rs.ac.bg.fon.ps.view.form.util.FormMode;
 
+/**
+ * Forma za cuvanje,prikaz i brisanje karata
+ * karta se pravi pri trazenju predstave i korisnika
+ * gleda se dali ima rezervacije i onda se pravi karta
+ * @author andelalausevic
+ */
 public class FrmKarta extends javax.swing.JDialog {
 
     /**
-     * Creates new form FrmProduct
+     * instanca klase LocalStorage 
      */
      private LocalStorage localStorage = LocalStorage.getInstance();
+   /**
+    * parametrizovan konstruktor forme u kom se inicijalizuju komponenete i priprema pogled
+    * @param parent da nasledjuje od svog roditelja
+    * @param modal  prima true ili false
+    * @param formMode u kom modu zelimo da se prikazuje forma add,delete ili view
+    */
     public FrmKarta(java.awt.Frame parent, boolean modal, FormMode formMode) {
         super(parent, modal);
         initComponents();
@@ -217,10 +229,19 @@ public class FrmKarta extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    /**
+     * Metoda koja se poziva kada se pritisne dugme "Sačuvaj" za čuvanje informacija o karti.
+     * Izvlači detalje o karti iz polja unosa i šalje zahtev za dodavanje karte koristeći klasu Communication.
+     * Ako je karta uspešno sačuvana, prikazuje se poruka o uspehu i dijalog se zatvara.
+     * Ako se desi izuzetak, prikazuje se poruka o grešci.
+     * 
+     * @param evt ActionEvent koji predstavlja događaj klika na dugme "Sačuvaj"
+     */
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         try {
+            
             Karta karta = new Karta();
             //karta.setKartaId(Integer.parseInt(getTxtID().getText().trim()));
             Integer cena=Integer.parseInt(getTxtPrice().getText().trim());
@@ -241,7 +262,14 @@ public class FrmKarta extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnSaveActionPerformed
-
+    /**
+     * Metoda koja se poziva kada se pritisne dugme "Obriši" za brisanje karte.
+     * Izvlači informacije o karti iz lokalnog skladišta (localStorage) i šalje zahtev za brisanje karte koristeći klasu Communication.
+     * Ako je karta uspešno obrisana, prikazuje se poruka o uspehu i dijalog se zatvara.
+     * Ako se desi izuzetak, prikazuje se poruka o grešci.
+     * 
+     * @param evt ActionEvent koji predstavlja događaj klika na dugme "Obriši"
+     */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         //TODO...
         
@@ -256,6 +284,15 @@ public class FrmKarta extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+
+    /**
+     * Metoda koja se poziva kada se pritisne dugme "Pretraga" za pretragu karata.
+     * Postavlja vidljivost određenih elemenata na formi.
+     * Omogućava unos nove karte.
+     * Popunjava ComboBox sa rezervacijama.
+     * 
+     * @param evt ActionEvent koji predstavlja događaj klika na dugme "Pretraga"
+     */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
              
@@ -274,6 +311,12 @@ public class FrmKarta extends javax.swing.JDialog {
         
     }//GEN-LAST:event_btnSearchActionPerformed
 
+    /**
+    * Metoda koja se poziva kada se pritisne dugme "Otkaži" za otkazivanje operacije.
+    * Zatvara trenutnu formu.
+    * 
+    * @param evt ActionEvent koji predstavlja događaj klika na dugme "Otkaži"
+    */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -299,91 +342,176 @@ public class FrmKarta extends javax.swing.JDialog {
     private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 
+    /**
+ * Metoda koja vraća dugme "Otkaži".
+ *
+ * @return JButton koji predstavlja dugme "Otkaži"
+ */
     public JButton getBtnCancel() {
         return btnCancel;
     }
-
+/**
+ * Metoda koja vraća dugme "Izbriši".
+ *
+ * @return JButton koji predstavlja dugme "Izbriši"
+ */
     public JButton getBtnDelete() {
         return btnDelete;
     }
 
 
-
+/**
+ * Metoda koja vraća dugme "Sačuvaj".
+ *
+ * @return JButton koji predstavlja dugme "Sačuvaj"
+ */
     public JButton getBtnSave() {
         return btnSave;
     }
+    /**
+ * Metoda koja vraća dugme "Pretraži".
+ *
+ * @return JButton koji predstavlja dugme "Pretraži"
+ */
       public JButton getBtnSearch() {
         return btnSearch;
     }
-
+/**
+ * Metoda koja vraća JComboBox za izbor klijenta.
+ *
+ * @return JComboBox koji predstavlja izbor klijenta
+ */
     public JComboBox<Object> getCbClient() {
         return cbClient;
     }
+    /**
+ * Metoda koja vraća JComboBox za prikaz.
+ *
+ * @return JComboBox koji predstavlja prikaz
+ */
     public JComboBox<Object> getCbShow() {
         return cbShow;
     }
+    /**
+ * Metoda koja vraća JComboBox za rezervaciju.
+ *
+ * @return JComboBox koji predstavlja rezervaciju
+ */
     public JComboBox<Object> getCbRezervacija() {
         return cbReservation;
     }
-
+/**
+ * Metoda koja vraća JPanel.
+ *
+ * @return JPanel koji predstavlja formu
+ */
     public JPanel getjPanel1() {
         return jPanel1;
     }
 
  
-
+/**
+ * Metoda koja vraća JLabel za klijenta.
+ *
+ * @return JLabel koji predstavlja klijenta
+ */
     public JLabel getLblClient() {
         return lblCLient;
     }
-
+/**
+ * Metoda koja vraća JLabel za ID.
+ *
+ * @return JLabel koji predstavlja ID
+ */
     public JLabel getLblId() {
         return lblId;
     }
+/**
+ * Metoda koja vraća JLabel za prikaz.
+ *
+ * @return JLabel koji predstavlja prikaz
+ */
 
     public JLabel getLblShow() {
         return lblShow;
     }
 
-
+/**
+ * Metoda koja vraća JLabel za rezervaciju.
+ *
+ * @return JLabel koji predstavlja rezervaciju
+ */
 
     public JLabel getLblReservation() {
         return lblReservation;
     }
-
+/**
+ * Metoda koja vraća JLabel za cenu.
+ *
+ * @return JLabel koji predstavlja cenu
+ */
     public JLabel getLblPrice() {
         return lblPrice;
     }
-
+/**
+ * Metoda koja vraća JLabel za napomenu.
+ *
+ * @return JLabel koji predstavlja napomenu
+ */
   public JLabel getLblNapomena() {
         return lblNapomena;
     }
-
+/**
+ * Metoda koja vraća JTextField za ID.
+ *
+ * @return JTextField koji predstavlja ID
+ */
     public JTextField getTxtID() {
         return txtID;
     }
 
 
-
+/**
+ * Metoda koja vraća JTextField za cenu.
+ *
+ * @return JTextField koji predstavlja cenu
+ */
     public JTextField getTxtPrice() {
         return txtPrice;
     }
-
+/**
+ * Metoda koja dodaje ActionListener na dugme "Save".
+ *
+ * @param actionListener ActionListener koji se dodaje
+ */
     public void addSaveBtnActionListener(ActionListener actionListener) {
         btnSave.addActionListener(actionListener);
     }
 
 
-
+/**
+ * Metoda koja dodaje ActionListener na dugme "Cancel".
+ *
+ * @param actionListener ActionListener koji se dodaje
+ */
     public void addCancelBtnActionListener(ActionListener actionListener) {
         btnCancel.addActionListener(actionListener);
     }
-
+/**
+ * Metoda koja dodaje ActionListener na dugme "Delete".
+ *
+ * @param actionListener ActionListener koji se dodaje
+ */
     public void addDeleteBtnActionListener(ActionListener actionListener) {
         btnDelete.addActionListener(actionListener);
     }
 
   
-
+/**
+ * Metoda koja priprema prikaz forme.
+ * i puni combo box klijenta i predstave
+ * @param formMode Mod forme (dodavanje, izmena, brisanje)
+ */
     private void prepareView(FormMode formMode) {
        
         try {
@@ -396,17 +524,30 @@ public class FrmKarta extends javax.swing.JDialog {
         setupComponents(formMode);
 
     }
-
+/**
+ * Popunjava ComboBox sa predstavama.
+ *
+ * @throws Exception Ukoliko dođe do greške prilikom komunikacije sa serverom.
+ */
   private void fillCbShows() throws Exception {
         getCbShow().removeAllItems();
         List<Predstava> shows = getShows();
         getCbShow().setModel(new DefaultComboBoxModel<>(shows.toArray()));
     }
-
+/**
+ * Vraća listu svih predstava.
+ *
+ * @return Lista predstava
+ * @throws Exception Ukoliko dođe do greške prilikom komunikacije sa serverom.
+ */
     private List<Predstava> getShows() throws Exception {
         return Communication.getInstance().getAllShows();
     }
-  
+  /**
+ * Popunjava ComboBox sa stavkama rezervacija na osnovu izabranih klijenta i predstave.
+ * ako za trazenog klijenta i predstavu nema rezervaciju izbacice se poruka o nemanju rezervacije
+ * @throws Exception Ukoliko dođe do greške prilikom komunikacije sa serverom.
+ */
      private void fillCbReservations() throws Exception {
          boolean flag=false;
        
@@ -442,20 +583,39 @@ public class FrmKarta extends javax.swing.JDialog {
       }
         
     
-
+/**
+ * Vraća listu svih rezervacija.
+ *
+ * @return Lista rezervacija.
+ * @throws Exception Ukoliko dođe do greške prilikom komunikacije sa serverom.
+ */
     private List<Rezervacija> getReservations() throws Exception {
         return Communication.getInstance().getAllReservations();
     }
+    /**
+ * Popunjava ComboBox sa svim klijentima.
+ *
+ * @throws Exception Ukoliko dođe do greške prilikom komunikacije sa serverom.
+ */
     private void fillCbClients() throws Exception {
         getCbClient().removeAllItems();
         List<Klijent> clienti = getClients();
         getCbClient().setModel(new DefaultComboBoxModel(clienti.toArray()));
     }
-
+/**
+ * Vraća listu svih klijenata.
+ *
+ * @return Lista klijenata.
+ * @throws Exception Ukoliko dođe do greške prilikom komunikacije sa serverom.
+ */
     private List<Klijent> getClients() throws Exception {
         return Communication.getInstance().getAllCLients();
     }
-
+/**
+ * Postavlja komponente forme u skladu sa zadanim režimom forme.
+ *
+ * @param formMode Režim forme (FORM_ADD, FORM_VIEW ili FORM_EDIT).
+ */
     private void setupComponents(FormMode formMode) {
         switch (formMode) {
             case FORM_ADD:
@@ -508,11 +668,18 @@ public class FrmKarta extends javax.swing.JDialog {
                 break;
         }
     }
-
+/**
+ * Vraća listu stavki rezervacija.
+ *
+ * @return Lista stavki rezervacija.
+ * @throws Exception Ukoliko se desi greška prilikom komunikacije sa serverom.
+ */
     private List<StavkaRezervacije> getStavke() throws Exception {
          return Communication.getInstance().getAllItemReservations();
     }
-
+/**
+ * Popunjava komponente forme sa podacima za prikaz.
+ */
     private void fillForView() {
         Karta pr=(Karta) localStorage.getItemFromHashMap("Karta");
         

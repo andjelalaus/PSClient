@@ -13,15 +13,23 @@ import rs.ac.bg.fon.ps.PSCommon.communication.Receiver;
 import rs.ac.bg.fon.ps.PSCommon.communication.Request;
 import rs.ac.bg.fon.ps.PSCommon.communication.Response;
 import rs.ac.bg.fon.ps.PSCommon.communication.Sender;
-import rs.ac.bg.fon.ps.domain.Klijent;
-import rs.ac.bg.fon.ps.domain.User;
-
+import rs.ac.bg.fon.ps.PSCommon.domain.Klijent;
+import rs.ac.bg.fon.ps.PSCommon.domain.User;
+/**
+ * FOrma koja predstavlja prijavnu formu
+ * Ukoliko korisnik upise dobro username i password
+ * prelazi na sledecu formu u suprotnom ostaje na istoj.
+ * @author andelalausevic
+ */
 public class FrmLogin extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmLogin
      */
-
+/**
+ * Konstruktor klase FrmLogin.
+ * Inicijalizuje komponente forme i postavlja lokaciju forme na centar ekrana.
+ */
     public FrmLogin() {
         initComponents();
         setLocationRelativeTo(null);
@@ -106,7 +114,14 @@ public class FrmLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Metoda koja se poziva prilikom klika na dugme za prijavljivanje (btnLogin).
+ * Pokušava izvršiti prijavljivanje korisnika na osnovu unetog korisničkog imena i lozinke.
+ * Ako su uneti podaci ispravni, korisnik se prijavljuje i otvara se glavna forma (FrmMain).
+ * U suprotnom, prikazuje se odgovarajuća greška.
+ * 
+ * @param evt Objekat koji predstavlja događaj klika na dugme
+ */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         try {
             String username = getTxtUsername().getText().trim();
@@ -136,38 +151,78 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
+    /**
+ * Dodaje prisluskivac dogadjaj na dugme za prijavljivanje (btnLogin).
+ *
+ * @param actionListener Prisluskivac dogadjaja koji se dodaje na dugme za prijavljivanje
+ */
     public void loginAddActionListener(ActionListener actionListener) {
         btnLogin.addActionListener(actionListener);
     }
-
+/**
+ * Vraća JLabel komponentu za prikaz greške vezane za korisničko ime (lblUsernameError).
+ *
+ * @return JLabel komponenta za prikaz greške vezane za korisničko ime
+ */
     public javax.swing.JLabel getLblUsernameError() {
         return lblUsernameError;
     }
-
+/**
+ * Postavlja JLabel komponentu za prikaz greške vezane za korisničko ime (lblUsernameError).
+ *
+ * @param lblUsernameError JLabel komponenta za prikaz greške vezane za korisničko ime
+ */
     public void setLblUsernameError(javax.swing.JLabel lblUsernameError) {
         this.lblUsernameError = lblUsernameError;
     }
-
+/**
+ * Vraća JPasswordField komponentu za unos lozinke (txtPassword).
+ *
+ * @return JPasswordField komponenta za unos lozinke
+ */
     public javax.swing.JPasswordField getTxtPassword() {
         return txtPassword;
     }
-
+/**
+ * Postavlja JPasswordField komponentu za unos lozinke (txtPassword).
+ *
+ * @param txtPassword JPasswordField komponenta za unos lozinke
+ */
     public void setTxtPassword(javax.swing.JPasswordField txtPassword) {
         this.txtPassword = txtPassword;
     }
-
+/**
+ * Vraća JTextField komponentu za unos korisničkog imena (txtUsername).
+ *
+ * @return JTextField komponenta za unos korisničkog imena
+ */
     public javax.swing.JTextField getTxtUsername() {
         return txtUsername;
     }
-
+/**
+ * Postavlja JTextField komponentu za unos korisničkog imena (txtUsername).
+ *
+ * @param txtUsername JTextField komponenta za unos korisničkog imena
+ */
     public void setTxtUsername(javax.swing.JTextField txtUsername) {
         this.txtUsername = txtUsername;
     }
-
+/**
+ * Vraća JLabel komponentu za prikaz greške vezane za lozinku (lblPasswordError).
+ *
+ * @return JLabel komponenta za prikaz greške vezane za lozinku
+ */
     public JLabel getLblPasswordError() {
         return lblPasswordError;
     }
-
+/**
+ * Validira formu za prijavljivanje. Proverava da li su uneti korisničko ime i lozinka prazni.
+ * Ukoliko su prazni, baca izuzetak sa odgovarajućom porukom.
+ *
+ * @param username Korisničko ime koje se validira
+ * @param password Lozinka koja se validira
+ * @throws Exception Izuzetak koji se baca ukoliko su korisničko ime i/ili lozinka prazni
+ */
     private void validateForm(String username, String password) throws Exception {
         String errorMessage = "";
         if (username.isEmpty()) {

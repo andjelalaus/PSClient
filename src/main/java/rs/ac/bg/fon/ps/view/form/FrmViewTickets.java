@@ -20,20 +20,29 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import rs.ac.bg.fon.ps.communication.Communication;
 import rs.ac.bg.fon.ps.communication.LocalStorage;
-import rs.ac.bg.fon.ps.domain.Karta;
-import rs.ac.bg.fon.ps.domain.Predstava;
-import rs.ac.bg.fon.ps.domain.Rezervacija;
+import rs.ac.bg.fon.ps.PSCommon.domain.Karta;
+import rs.ac.bg.fon.ps.PSCommon.domain.Predstava;
+import rs.ac.bg.fon.ps.PSCommon.domain.Rezervacija;
 import rs.ac.bg.fon.ps.view.form.componenet.table.ShowsTableModel;
 import rs.ac.bg.fon.ps.view.form.util.FormMode;
 
-
+/**
+ * Forma koja pretragom klijenta i predstave
+ * vraca kartu za istog ili karte
+ * @author andelalausevic
+ */
 public class FrmViewTickets extends javax.swing.JDialog {
 
-    /**
-     * Creates new form FrmViewProducts
-     * @param parent
+   /**
+     *objekat klase LocalStorage koji sluzi za slanje karte kada se izabere
      */
     private LocalStorage localStorage = LocalStorage.getInstance();
+    /**
+ * Konstruktor klase FrmViewTickets.
+ * 
+ * @param parent Roditeljski prozor
+ * @param modal Modalnost prozora
+ */
     public FrmViewTickets(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -130,7 +139,12 @@ public class FrmViewTickets extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Metoda koja se poziva prilikom klika na dugme "Detalji".
+ *ukoliko je klijent dobro izabran salje se karta preko lokalnog skladista 
+ * formi karta za prikaz
+ * @param evt Događaj klika na dugme
+ */
     private void btnDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailsActionPerformed
         // TODO...
         if(getCbTickets().getSelectedIndex()!=-1){
@@ -145,7 +159,12 @@ public class FrmViewTickets extends javax.swing.JDialog {
         
         
     }//GEN-LAST:event_btnDetailsActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom klika na dugme "Pretraga".
+ *Mora da postoji i predstava i klijent za koje postoji rezervacija odnosno karta
+ * ispisuje se poruka o uspecu ili neuspehu
+ * @param evt Događaj klika na dugme
+ */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
        
@@ -193,34 +212,78 @@ public class FrmViewTickets extends javax.swing.JDialog {
     private javax.swing.JTextField txtNameOfShow;
     // End of variables declaration//GEN-END:variables
 
+    /**
+ * Metoda koja vraća dugme "Detalji".
+ *
+ * @return Dugme "Detalji"
+ */
     public JButton getBtnDetails() {
         return btnDetails;
     }
+    /**
+ * Metoda koja vraća dugme "Pretraga".
+ *
+ * @return Dugme "Pretraga"
+ */
      public JButton getBtnSearch() {
         return btnSearch;
     }
+     /**
+ * Metoda koja vraća padajuću listu "Ulaznice".
+ *
+ * @return Padajuća lista "Ulaznice"
+ */
       public JComboBox<Object> getCbTickets() {
         return cbTickets;
     }
+      /**
+ * Metoda koja vraća tekstualno polje "Naziv predstave".
+ *
+ * @return Tekstualno polje "Naziv predstave"
+ */
     public JTextField getTxtNameOfShow() {
         return txtNameOfShow;
     }
+    /**
+ * Metoda koja vraća tekstualno polje "Naziv klijenta".
+ *
+ * @return Tekstualno polje "Naziv klijenta"
+ */
     public JTextField getTxtNameOfClient() {
         return txtNameOfClient;
     }
+    /**
+ * Metoda koja vraća oznaku "Pretraga".
+ *
+ * @return Oznaka "Pretraga"
+ */
      public JLabel getLblSearch() {
         return lblShow;
     }
+     /**
+ * Metoda koja vraća oznaku "Ulaznica".
+ *
+ * @return Oznaka "Ulaznica"
+ */
       public JLabel getLblTicket() {
         return lblTicket;
     }
 
   
+/**
+ * Metoda za dodavanje slušaoca događaja na dugme "Detalji".
+ *
+ * @param actionListener Slušalac događaja
+ */
 
     public void getBtnDetailsAddActionListener(ActionListener actionListener) {
         btnDetails.addActionListener(actionListener);
     }
-    
+    /**
+ * Metoda koja se izvršava prilikom inicijalizacije prozora.
+ * Priprema prikaz prozora gde je dugme detalji nevidljivo
+ * nevidljiv je combo za karte i label za karte
+ */
     private void prepareView() {
        getBtnDetails().setVisible(false);
        getCbTickets().setVisible(false);

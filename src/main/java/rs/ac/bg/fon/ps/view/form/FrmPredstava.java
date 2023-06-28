@@ -29,19 +29,30 @@ import rs.ac.bg.fon.ps.PSCommon.communication.Receiver;
 import rs.ac.bg.fon.ps.PSCommon.communication.Request;
 import rs.ac.bg.fon.ps.PSCommon.communication.Response;
 import rs.ac.bg.fon.ps.PSCommon.communication.Sender;
-import rs.ac.bg.fon.ps.domain.Karta;
-import rs.ac.bg.fon.ps.domain.PlanGledanja;
-import rs.ac.bg.fon.ps.domain.Predstava;
-import rs.ac.bg.fon.ps.domain.StavkaRezervacije;
+import rs.ac.bg.fon.ps.PSCommon.domain.Karta;
+import rs.ac.bg.fon.ps.PSCommon.domain.PlanGledanja;
+import rs.ac.bg.fon.ps.PSCommon.domain.Predstava;
+import rs.ac.bg.fon.ps.PSCommon.domain.StavkaRezervacije;
 
 import rs.ac.bg.fon.ps.view.form.util.FormMode;
-
+/**
+ * Forma koja dozvoljava pravljenje,gledanje podataka o predstavi
+ * i brisanje predstave
+ * prikazani su id,ime,vreme,mesto i kapacitet predstave
+ * @author andelalausevic
+ */
 public class FrmPredstava extends javax.swing.JDialog {
 
     /**
-     * Creates new form FrmProduct
+     * objekat klase LocalStorage da se iz njega izvuce ili sacuva predstava
      */
     private LocalStorage localStorage = LocalStorage.getInstance();
+    /**
+ * Konstruktor koji kreira novu instancu forme FrmPredstava.
+ * @param parent Roditeljski okvir forme
+ * @param modal Modalnost forme
+ * @param formMode Režim forme (FORM_ADD, FORM_EDIT, FORM_VIEW)
+ */
     public FrmPredstava(java.awt.Frame parent, boolean modal, FormMode formMode) {
         super(parent, modal);
         initComponents();
@@ -191,7 +202,15 @@ public class FrmPredstava extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Metoda koja se poziva kada korisnik pritisne dugme za čuvanje predstave.
+ * Ova metoda validira unete podatke, kreira objekat predstave sa unetim vrednostima
+ * vreme mora da bude buduce vreme
+ * kapacitet mora biti broj
+ * i poziva odgovarajuću metodu za dodavanje predstave u sistem.
+ * pokazace se da li je saved ili not saved
+ * @param evt Događaj koji je pokrenuo poziv metode
+ */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
         try {
@@ -222,7 +241,12 @@ public class FrmPredstava extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnSaveActionPerformed
-
+/**
+ * Metoda koja se poziva kada korisnik pritisne dugme za brisanje predstave.
+ * Ova metoda prikazuje dijalog za potvrdu brisanja, a zatim obavlja brisanje predstave
+ * i svih povezanih rezervacija, karata i planova gledanja.
+ * @param evt Događaj koji je pokrenuo poziv metode
+ */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         //TODO...
         int br=JOptionPane.showConfirmDialog(this, "Are you sure you want to delete a show, potentially deleting all reservations and tickets and viewing plans for it.","WARNING",JOptionPane.YES_NO_OPTION);
@@ -254,7 +278,11 @@ public class FrmPredstava extends javax.swing.JDialog {
         }
             
     }//GEN-LAST:event_btnDeleteActionPerformed
-
+/**
+ * Metoda koja se poziva kada korisnik pritisne dugme za otkazivanje ili zatvaranje prozora.
+ * Ova metoda jednostavno zatvara trenutni prozor.
+ * @param evt Događaj koji je pokrenuo poziv metode
+ */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -277,77 +305,147 @@ public class FrmPredstava extends javax.swing.JDialog {
     private javax.swing.JTextField txtPlace;
     private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
-
+/**
+ * Metoda koja vraća dugme za otkazivanje.
+ *
+ * @return Dugme za otkazivanje
+ */
     public JButton getBtnCancel() {
         return btnCancel;
     }
-
+/**
+ * Metoda koja vraća dugme za brisanje.
+ *
+ * @return Dugme za brisanje
+ */
     public JButton getBtnDelete() {
         return btnDelete;
     }
 
- 
+ /**
+ * Metoda koja vraća dugme za čuvanje.
+ *
+ * @return Dugme za čuvanje
+ */
     public JButton getBtnSave() {
         return btnSave;
     }
 
-
+/**
+ * Metoda koja vraća panel.
+ *
+ * @return Panel
+ */
     public JPanel getjPanel1() {
         return jPanel1;
     }
-
+/**
+ * Metoda koja vraća oznaku za identifikator.
+ *
+ * @return Oznaka za identifikator
+ */
     public JLabel getLblId() {
         return lblId;
     }
 
   
-
+/**
+ * Metoda koja vraća oznaku za kapacitet.
+ *
+ * @return Oznaka za kapacitet
+ */
     public JLabel getLblCapacity() {
         return lblCapacity;
     }
-
+/**
+ * Metoda koja vraća oznaku za ime.
+ *
+ * @return Oznaka za ime
+ */
     public JLabel getLblName() {
         return lblName;
     }
-
+/**
+ * Metoda koja vraća oznaku za vreme.
+ *
+ * @return Oznaka za vreme
+ */
     public JLabel getLblTime() {
         return lblTime;
     }
-
+/**
+ * Metoda koja vraća tekstualno polje za mesto.
+ *
+ * @return Tekstualno polje za mesto
+ */
     public JTextField getTxtPlace() {
         return txtPlace;
     }
+    /**
+ * Metoda koja vraća tekstualno polje za vreme.
+ *
+ * @return Tekstualno polje za vreme
+ */
       public JTextField getTxtTime() {
         return txtTime;
     }
-
+/**
+ * Metoda koja vraća tekstualno polje za identifikator.
+ *
+ * @return Tekstualno polje za identifikator
+ */
     public JTextField getTxtID() {
         return txtID;
     }
-
+/**
+ * Metoda koja vraća tekstualno polje za ime.
+ *
+ * @return Tekstualno polje za ime
+ */
     public JTextField getTxtName() {
         return txtName;
     }
-
+/**
+ * Metoda koja vraća tekstualno polje za kapacitet.
+ *
+ * @return Tekstualno polje za kapacitet
+ */
     public JTextField getTxtCapcity() {
         return txtCapacity;
     }
+    /**
+ * Metoda za dodavanje slušaoca događaja na dugme "Save".
+ *
+ * @param actionListener Slušalac događaja koji se dodaje
+ */
 
     public void addSaveBtnActionListener(ActionListener actionListener) {
         btnSave.addActionListener(actionListener);
     }
 
   
-
+/**
+ * Metoda za dodavanje slušaoca događaja na dugme "Cancel".
+ *
+ * @param actionListener Slušalac događaja koji se dodaje
+ */
     public void addCancelBtnActionListener(ActionListener actionListener) {
         btnCancel.addActionListener(actionListener);
     }
-
+/**
+ * Metoda za dodavanje slušaoca događaja na dugme "Delete".
+ *
+ * @param actionListener Slušalac događaja koji se dodaje
+ */
     public void addDeleteBtnActionListener(ActionListener actionListener) {
         btnDelete.addActionListener(actionListener);
     }
 
-
+/**
+ * Metoda koja priprema prikaz forme na osnovu režima rada.
+ *
+ * @param formMode Režim rada forme
+ */
     private void prepareView(FormMode formMode) {
        
         setupComponents(formMode);
@@ -356,7 +454,13 @@ public class FrmPredstava extends javax.swing.JDialog {
 
     
 
-   
+   /**
+ * Metoda koja podešava komponente forme na osnovu režima rada.
+ * za add se mogu videti sve stavke ne moze se dodati id i nije moguce kliknuti delte dugme
+ * za gledanje ne moze add dugme i nista da se promeni al moze delete
+ * edit se za kartu ne poziva iako ima napisano
+ * @param formMode Režim rada forme
+ */
     private void setupComponents(FormMode formMode) {
         switch (formMode) {
             case FORM_ADD:
@@ -410,7 +514,10 @@ public class FrmPredstava extends javax.swing.JDialog {
                 break;
         }
     }
-
+/**
+ * Metoda koja postavlja vrednosti komponenti za prikaz predstave.
+ * izvlaci iz localStorage predstavu i postavlja njene atribute na formu
+ */
     private void setForView() {
         Predstava pr=(Predstava) localStorage.getItemFromHashMap("Predstava");
         getTxtID().setText(pr.getPredstavaId().toString());
@@ -420,24 +527,57 @@ public class FrmPredstava extends javax.swing.JDialog {
         getTxtPlace().setText(pr.getMesto());
         getTxtCapcity().setText(pr.getKapacitet().toString());
     }
+    /**
+ * Metoda koja vraća sve stavke rezervacija.
+ *
+ * @return Lista stavki rezervacija
+ * @throws Exception Ukoliko se desi greška prilikom komunikacije sa serverom
+ */
      private List<StavkaRezervacije> getStavke() throws Exception {
          return Communication.getInstance().getAllItemReservations();
     }
+     /**
+ * Metoda koja vraća sve karte.
+ *
+ * @return Lista karata
+ * @throws Exception Ukoliko se desi greška prilikom komunikacije sa serverom
+ */
       private List<Karta> getKarte() throws Exception {
          return Communication.getInstance().getAllTickets();
     }
+      /**
+ * Metoda koja briše stavku rezervacije.
+ *
+ * @param st Stavka rezervacije koja se briše
+ * @throws Exception Ukoliko se desi greška prilikom komunikacije sa serverom
+ */
       private void deleteStavke(StavkaRezervacije st) throws Exception {
         Communication.getInstance().deleteStavka(st);
     }
-
+/**
+ * Metoda koja briše kartu.
+ *
+ * @param k Karta koja se briše
+ * @throws Exception Ukoliko se desi greška prilikom komunikacije sa serverom
+ */
     private void deleteKarta(Karta k) throws Exception {
         Communication.getInstance().deleteTicket(k);
     }
-
+/**
+ * Metoda koja vraća sve planove gledanja.
+ *
+ * @return Lista planova gledanja
+ * @throws Exception Ukoliko se desi greška prilikom komunikacije sa serverom
+ */
     private List<PlanGledanja> getPlan() throws Exception {
         return Communication.getInstance().getAllPlan();
     }
-
+/**
+ * Metoda koja briše plan gledanja.
+ *
+ * @param pl Plan gledanja koji se briše
+ * @throws Exception Ukoliko se desi greška prilikom komunikacije sa serverom
+ */
     private void deletePlanGledanja(PlanGledanja pl) throws Exception {
         Communication.getInstance().deletePlan(pl);
     }

@@ -8,8 +8,9 @@ import rs.ac.bg.fon.ps.validator.IValidator;
 import rs.ac.bg.fon.ps.validator.ValidatorException;
 
 /**
- *
- * @author Vuk
+ * Klasa NumberValidator koja implementira interfejs IValidator i njegovu metodu validate
+ * Proverava da li broj stvarno broj i da nije negativan ili null ili prazan
+ * @author Andjy
  */
 public class NumberValidator implements IValidator{
 

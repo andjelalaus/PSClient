@@ -24,20 +24,26 @@ import rs.ac.bg.fon.ps.PSCommon.communication.Receiver;
 import rs.ac.bg.fon.ps.PSCommon.communication.Request;
 import rs.ac.bg.fon.ps.PSCommon.communication.Response;
 import rs.ac.bg.fon.ps.PSCommon.communication.Sender;
-import rs.ac.bg.fon.ps.domain.Klijent;
-import rs.ac.bg.fon.ps.domain.PlanGledanja;
-import rs.ac.bg.fon.ps.domain.Predstava;
-import rs.ac.bg.fon.ps.domain.Rezervacija;
-import rs.ac.bg.fon.ps.domain.StavkaRezervacije;
+import rs.ac.bg.fon.ps.PSCommon.domain.Klijent;
+import rs.ac.bg.fon.ps.PSCommon.domain.PlanGledanja;
+import rs.ac.bg.fon.ps.PSCommon.domain.Predstava;
+import rs.ac.bg.fon.ps.PSCommon.domain.Rezervacija;
+import rs.ac.bg.fon.ps.PSCommon.domain.StavkaRezervacije;
 import rs.ac.bg.fon.ps.view.form.componenet.table.ReservationsTableModel;
-
+/**
+ * Forma koja sluzi za pravljenje plana gledanja klijenta
+ * moze se uneti za klijenta sta je gledao i ocenu njegovu
+ * ili sta nije gledao a zeli
+ * @author andelalausevic
+ */
 public class FrmPlanGledanja extends javax.swing.JDialog {
 
-    /**
-     * Creates new form FrmInvoice
-     */
   
-
+/**
+ * Konstruktor koji kreira novi dijalog za plan gledanja.
+ * @param parent Roditeljski okvir
+ * @param modal Modalnost dijaloga
+ */
     public FrmPlanGledanja(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -167,11 +173,24 @@ public class FrmPlanGledanja extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Ova metoda se ne korist,zanemariti je
+ * @param evt je  dogadjaj koji je okinuo metodu
+ */
     private void btnSaveProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveProduct1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSaveProduct1ActionPerformed
-
+/**
+ * Metoda koja se poziva kada korisnik pritisne dugme za čuvanje.
+ * Validira unete podatke, kreira i čuva novi plan gledanja na osnovu unetih podataka.
+ * Zatim prikazuje poruku o uspešnom čuvanju i zatvara trenutni dijalog.
+ * Ako se desi greška, prikazuje poruku o neuspešnom čuvanju i detalje greške.
+ * Mora da se izabere klijent i predstava bez njih nije moguce napraviti plan
+ * uzima se i ocena koja ne sme biti prazna
+ * i setuje se da li je gledao na osnovu izbora na formi
+ * bice prikazano da li je sacuvan ili ne
+ * @param evt Događaj koji je okidač za poziv metode
+ */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
          try {
@@ -198,35 +217,61 @@ public class FrmPlanGledanja extends javax.swing.JDialog {
                 }
     }//GEN-LAST:event_btnSaveActionPerformed
 
-    
+    /**
+ * Metoda koja vraća oznaku za prikaz predstave.
+ * @return Oznaka za prikaz predstave
+ */
     public JLabel getLblShow() {
         return lblPredstava;
     }
+    /**
+ * Metoda koja vraća oznaku za popust.
+ * @return Oznaka za popust
+ */
      public JLabel getLblDiscount() {
         return lblGrade;
     }
-     
+     /**
+ * Metoda koja vraća oznaku za status gledanja.
+ * @return Oznaka za status gledanja
+ */
     public JLabel getLblWatched() {
         return lblWatched;
     }
-   
+   /**
+ * Metoda koja vraća oznaku za klijenta.
+ * @return Oznaka za klijenta
+ */
      public JLabel getLblClient() {
         return jClient;
     }
-
+/**
+ * Metoda koja vraća padajuću listu za izbor predstave.
+ * @return Padajuća lista za izbor predstave
+ */
     public JComboBox<Object> getCbPredstava() {
         return cbProduct;
     }
+    /**
+ * Metoda koja vraća padajuću listu za izbor klijenta.
+ * @return Padajuća lista za izbor klijenta
+ */
     public JComboBox<Object> getCbClient() {
         return cbClients;
     }
-   
+    /**
+ * Metoda koja vraća padajuću listu za izbor statusa gledanja.
+ * @return Padajuća lista za izbor statusa gledanja
+ */
       public JComboBox<String> getCbWatched() {
         return cbWatched;
     }
 
    
-  
+  /**
+ * Metoda koja vraća dugme za čuvanje.
+ * @return Dugme za čuvanje
+ */
     public JButton getBtnSave(){
        return btnSave;
    }

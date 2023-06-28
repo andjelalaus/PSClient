@@ -5,17 +5,37 @@ import java.net.Socket;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import rs.ac.bg.fon.ps.domain.User;
+import rs.ac.bg.fon.ps.PSCommon.domain.User;
 import rs.ac.bg.fon.ps.view.form.util.FormMode;
 
-
+/**
+ * Predstavlja glavnu formu
+ * sve sistemske operacije su izlistane ovde
+ * i iz padajuceg menija mogu da se izaberu
+ * tu je za dodavanje klijenta
+ * dodavanje pretrazivanje brisanje predstave
+ * pretraga unos brisanje auzuriranje rezervacije
+ * dodavanje brisanje karte
+ * kreiranje planagledanja
+ * @author andelalausevic
+ */
 public class FrmMain extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmMain
+     * Soket koji sluzi za komunikaciju sa serverom
      */
     Socket socket = null;
+    /**
+     * Korisnik koji koristi aplikaciju
+     */
     User user;
+    /**
+ * Konstruktor klase FrmMain
+ * ima naslov Projekta PS-Pocetna forma.
+ * prosledjenog usera setuje
+ * i priprema formu
+ * @param user Objekat User koji predstavlja prijavljenog korisnika.
+ */
     public FrmMain(User user) {
         super("Projekat PS - Pocetna forma");
         initComponents();
@@ -195,67 +215,118 @@ public class FrmMain extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni klijenta.
+ * @param evt Akcija događaja
+ */
     private void jmenuKlijentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuKlijentActionPerformed
     }//GEN-LAST:event_jmenuKlijentActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni predstave.
+ * @param evt Akcija događaja
+ */
     private void jmenuPredstavaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuPredstavaActionPerformed
       
     }//GEN-LAST:event_jmenuPredstavaActionPerformed
 
+ /**
+ * Metoda koja se poziva prilikom akcije na meni stavci za kreiranje klijenta.
+ * Otvara formu FrmKlijent za dodavanje novog klijenta.
+ * @param evt Akcija događaja
+ */
     private void jmiKlijentCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKlijentCreateActionPerformed
        new FrmKlijent(this, true,FormMode.FORM_ADD).setVisible(true);
     }//GEN-LAST:event_jmiKlijentCreateActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni stavci za kreiranje predstave.
+ * Otvara formu FrmPredstava za dodavanje nove predstave.
+ * @param evt Akcija događaja
+ */
     private void jmiPredstavaCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPredstavaCreateActionPerformed
        new FrmPredstava(this, true, FormMode.FORM_ADD).setVisible(true);
     }//GEN-LAST:event_jmiPredstavaCreateActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni stavci za promenu rezervacije.
+ * Otvara formu FrmPretragaRezervacija za pretragu i promenu rezervacija.
+ * @param evt Akcija događaja
+ */
     private void jmiRezervacijaChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRezervacijaChangeActionPerformed
         // TODO add your handling code here:
         FrmPretragaRezervacija frm=new FrmPretragaRezervacija(this, rootPaneCheckingEnabled);
         frm.setVisible(true);
     }//GEN-LAST:event_jmiRezervacijaChangeActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni stavci za kreiranje rezervacije.
+ * Otvara formu FrmRezervacija za dodavanje nove rezervacije.
+ * @param evt Akcija događaja
+ */
     private void jmiRezervacijaCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRezervacijaCreateActionPerformed
         // TODO add your handling code here:
         new FrmRezervacija(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_jmiRezervacijaCreateActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni stavci za brisanje karte.
+ * Otvara formu FrmViewTickets za pregled i brisanje karata.
+ * @param evt Akcija događaja
+ */
     private void jmiPredstavaSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPredstavaSearchActionPerformed
         // TODO add your handling code here:
         FrmViewShows frm=new FrmViewShows(this, rootPaneCheckingEnabled);
         frm.setVisible(true);
     }//GEN-LAST:event_jmiPredstavaSearchActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni stavci za kreiranje plana gledanja.
+ * Otvara formu FrmPlanGledanja za kreiranje novog plana gledanja.
+ * @param evt Akcija događaja
+ */
     private void jmiKartaCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKartaCreateActionPerformed
         // TODO add your handling code here:
         new FrmKarta(this, true, FormMode.FORM_ADD).setVisible(true);
     }//GEN-LAST:event_jmiKartaCreateActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni stavci za pretragu predstava.
+ * Otvara formu FrmViewShows za pregled svih predstava.
+ * @param evt Akcija događaja
+ */
     private void jmiPredstavaDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPredstavaDeleteActionPerformed
         // TODO add your handling code here:
         FrmViewShows frm=new FrmViewShows(this, rootPaneCheckingEnabled);
         frm.setVisible(true);
     }//GEN-LAST:event_jmiPredstavaDeleteActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni stavci za kreiranje karte.
+ * Otvara formu FrmKarta za dodavanje nove karte.
+ * @param evt Akcija događaja
+ */
     private void jmiRezervacijaSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRezervacijaSearchActionPerformed
         // TODO add your handling code here:
         FrmPretragaRezervacija frm=new FrmPretragaRezervacija(this, rootPaneCheckingEnabled);
         frm.setVisible(true);
     }//GEN-LAST:event_jmiRezervacijaSearchActionPerformed
-
+/**
+ * Metoda koja se poziva prilikom akcije na meni stavci za brisanje predstave.
+ * Otvara formu FrmViewShows za pregled i brisanje predstava.
+ * @param evt Akcija događaja
+ */
     private void jmiRezervacijaDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRezervacijaDeleteActionPerformed
         // TODO add your handling code here:
         FrmPretragaRezervacija frm=new FrmPretragaRezervacija(this, rootPaneCheckingEnabled);
         frm.setVisible(true);
     }//GEN-LAST:event_jmiRezervacijaDeleteActionPerformed
-
+/**
+ * Vrši neophodne radnje kada je izabrana opcija "Brisanje karte" u meniju.
+ * Otvara formu FrmViewTickets za pregled i brisanje karata.
+ * @param evt Događaj akcije
+ */
     private void jmiKartaDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiKartaDeleteActionPerformed
         // TODO add your handling code here:
         new FrmViewTickets(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_jmiKartaDeleteActionPerformed
-
+/**
+ * Vrši neophodne radnje kada je izabrana opcija "Kreiranje plana gledanja" u meniju.
+ * Otvara formu FrmPlanGledanja za kreiranje novog plana gledanja.
+ * @param evt Događaj akcije
+ */
     private void jmiPLanGledanjaCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPLanGledanjaCreateActionPerformed
         // TODO add your handling code here:
         new FrmPlanGledanja(this, rootPaneCheckingEnabled).setVisible(true);
@@ -282,21 +353,32 @@ public class FrmMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiRezervacijaSearch;
     private javax.swing.JLabel lblCurrentUser;
     // End of variables declaration//GEN-END:variables
-
+/**
+ * Dodaje ActionListener za opciju "Kreiranje novog proizvoda" u meniju.
+ * @param actionListener ActionListener koji se dodaje
+ */
     public void jmiProductNewAddActionListener(ActionListener actionListener) {
         jmiKlijentCreate.addActionListener(actionListener);
     }
 
    
-
+/**
+ * Vraća JLabel komponentu koja prikazuje trenutno prijavljenog korisnika.
+ * @return JLabel komponenta sa prikazom trenutnog korisnika
+ */
     public JLabel getLblCurrentUser() {
         return lblCurrentUser;
     }
-
+/**
+ * Vraća JMenuItem komponentu za opciju "NovaPredstava" u meniju.
+ * @return JMenuItem komponenta za opciju "Nova predstava"
+ */
     public JMenuItem getJmiInvoiceNew() {
         return jmiPredstavaCreate;
     }
-
+/**
+ * Vrši pripremu forme, postavlja tekst za prikaz trenutnog korisnika.
+ */
     private void prepare() {
         getLblCurrentUser().setText("Trenutni korisnik i ujedno jedini korisnik je: "+user.getUsername());
     }

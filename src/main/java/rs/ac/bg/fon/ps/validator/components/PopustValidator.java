@@ -8,8 +8,9 @@ import rs.ac.bg.fon.ps.validator.IValidator;
 import rs.ac.bg.fon.ps.validator.ValidatorException;
 
 /**
- *
- * @author Vuk
+ * Klasa PopustValidator koja implementira interfejs IValidator i njegovu metodu validate
+ * Proverava da li vrednost nije prazna ili null da je u formi broja i da nije manja od 0 ili veca od 100
+ * @author Andjy
  */
 public class PopustValidator implements IValidator{
 

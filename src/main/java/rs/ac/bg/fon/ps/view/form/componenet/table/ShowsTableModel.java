@@ -8,18 +8,27 @@ package rs.ac.bg.fon.ps.view.form.componenet.table;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import rs.ac.bg.fon.ps.domain.PlanGledanja;
-import rs.ac.bg.fon.ps.domain.Predstava;
-import rs.ac.bg.fon.ps.domain.Rezervacija;
+import rs.ac.bg.fon.ps.PSCommon.domain.PlanGledanja;
+import rs.ac.bg.fon.ps.PSCommon.domain.Predstava;
+import rs.ac.bg.fon.ps.PSCommon.domain.Rezervacija;
 
 /**
- *
- * @author laptop-02
+ * Model za prikaz tabele predstava
+ * @author Andjy
  */
 public class ShowsTableModel extends AbstractTableModel{
+    /**
+     * imena kolona su id name place time capacity
+     */
     private final String[] columnNames= {"ID","Name","Place","Time","Capacity"};
+    /**
+     * lista predstavi koja ce se prikazivati na tabeli
+     */
     private final List<Predstava> shows;
-
+/**
+ * Konstruktor klase koji setuje listu
+ * @param shows lista predstavi
+ */
     public ShowsTableModel(List<Predstava> shows) {
         this.shows = shows;
     }
@@ -82,13 +91,20 @@ public class ShowsTableModel extends AbstractTableModel{
                 return "n/a";
         }
     }
-
+/**
+ * Metoda koja dodaju predstavu na listu predstavi.
+ * @param product predstava koja se dodaje
+ */
     public void addProduct(Predstava product) {
         shows.add(product);
         //fireTableDataChanged();
         fireTableRowsInserted(shows.size()-1, shows.size()-1);
     }
-
+/**
+ * vrati predstavu u tom redu
+ * @param row iz kog treba da se vrati
+ * @return predstavu u zadatom redu
+ */
     public Predstava getProductAt(int row) {
         return shows.get(row);
     }

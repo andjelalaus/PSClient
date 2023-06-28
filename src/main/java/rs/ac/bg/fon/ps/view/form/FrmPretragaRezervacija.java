@@ -25,24 +25,47 @@ import rs.ac.bg.fon.ps.PSCommon.communication.Receiver;
 import rs.ac.bg.fon.ps.PSCommon.communication.Request;
 import rs.ac.bg.fon.ps.PSCommon.communication.Response;
 import rs.ac.bg.fon.ps.PSCommon.communication.Sender;
-import rs.ac.bg.fon.ps.domain.Karta;
-import rs.ac.bg.fon.ps.domain.Klijent;
-import rs.ac.bg.fon.ps.domain.Predstava;
-import rs.ac.bg.fon.ps.domain.Rezervacija;
-import rs.ac.bg.fon.ps.domain.StavkaRezervacije;
+import rs.ac.bg.fon.ps.PSCommon.domain.Karta;
+import rs.ac.bg.fon.ps.PSCommon.domain.Klijent;
+import rs.ac.bg.fon.ps.PSCommon.domain.Predstava;
+import rs.ac.bg.fon.ps.PSCommon.domain.Rezervacija;
+import rs.ac.bg.fon.ps.PSCommon.domain.StavkaRezervacije;
 import rs.ac.bg.fon.ps.view.form.componenet.table.ReservationsTableModel;
-
+/**
+ * Forma koja radi po principu pretrazivanja klijenata
+ * onda se vidi da li klijent ima rezervaciju
+ * ukoliko je to slucaj setuju se sve vrednosti njene
+ * i moguce je menjati je ili obrisati ili samo pogledati
+ * @author andelalausevic
+ */
 public class FrmPretragaRezervacija extends javax.swing.JDialog {
-
+   
     /**
-     * Creates new form FrmInvoice
-     */
-  
-    private ArrayList<StavkaRezervacije> nove;
+    * Lista stavkirezervacija ali novih koje ce se dodati pri auzuriranju rezervacije
+    */
+     private ArrayList<StavkaRezervacije> nove;
+     /**
+    * Lista stavkirezervacija ali starih koje ce se nece dodati pri auzuriranju rezervacije
+    */
       private ArrayList<StavkaRezervacije> stare=new ArrayList<>();
+      /**
+    * Lista stavkirezervacija ali onih za izbacivanje koje se nece  dodati pri auzuriranju rezervacije
+    */
       private ArrayList<StavkaRezervacije> zaIzbacivanje=new ArrayList<>();
+      /**
+    * Lista stavkirezervacija  koje ce se dodati pri auzuriranju rezervacije
+    */
       private ArrayList<StavkaRezervacije> zaDodavanje=new ArrayList<>();
+      /**
+    * Lista stavkirezervacija sa kojima ne treba nista da se radi  pri auzuriranju rezervacije
+    */
       private ArrayList<StavkaRezervacije> nista=new ArrayList<>();
+     /**
+ * Konstruktor klase FrmPretragaRezervacija.
+ *
+ * @param parent Roditeljski okvir
+ * @param modal Modalnost prozora
+ */
     public FrmPretragaRezervacija(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -315,7 +338,15 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Metoda koja se poziva kada se pritisne dugme za dodavanje predstave u rezervaciju.
+ *Gleda se koja je predstava izabrana za nju se unosi popust, koliko sedista se zeli rezervisati
+ * i da li je vec korisnik gledao
+ * zatim se pojavljuje ta stavka rezervacije u tabeli
+ * i dodaje se na listu stavki zadodavanje
+ * ukoliko nisu podaci dobro uneti bice poruka o gresci
+ * @param evt Događaj akcije
+ */
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         try {
                     Predstava predstava = (Predstava) getCbPredstava().getSelectedItem();
@@ -334,7 +365,12 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Invalid predstava data!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
     }//GEN-LAST:event_btnAddProductActionPerformed
-
+/**
+ * Metoda koja se poziva kada se pritisne dugme za uklanjanje stavke rezervacije.
+ *uzima se selektovana iz tabele stavka
+ * dodaje se na lsitu zaizbacivanje i izbacuje se iz tabele
+ * @param evt Događaj akcije
+ */
     private void btnRemoveInvoiceItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveInvoiceItemActionPerformed
         int rowIndex = getTblRezervacija().getSelectedRow();
                 ReservationsTableModel model = (ReservationsTableModel) getTblRezervacija().getModel();
@@ -348,11 +384,22 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
                 }
                 
     }//GEN-LAST:event_btnRemoveInvoiceItemActionPerformed
-
+/**
+ * 
+ *Ova metoda se ne koristi.
+ * @param evt Događaj akcije
+ */
     private void btnSaveProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveProduct1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSaveProduct1ActionPerformed
-
+/**
+ * Metoda koja se poziva kada se pritisne dugme za odabir rezervacije.
+ *Kada se izabere rezervacija iz padajuceg menija
+ * popunjavaju se njene vrednosti na formi
+ * njene stavke se dodaju u listu nove
+ * ukoliko korisnik nije izabrao rezervaciju izaci ce mu poruka o tome
+ * @param evt Događaj akcije
+ */
     private void btnChoseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoseActionPerformed
         // TODO add your handling code here:
             try {
@@ -391,7 +438,12 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
         }
          
     }//GEN-LAST:event_btnChoseActionPerformed
-
+/**
+ * Metoda koja se poziva kada se pritisne dugme za pretragu rezervacija.
+ *Ukoliko klijent ne postoji izlazi odgovarajuca poruka
+ * ukoliko postoji combobox se puni njegovim rezervacijama
+ * @param evt Događaj akcije
+ */
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
             // TODO add your handling code here:
@@ -423,13 +475,24 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
         }
             
     }//GEN-LAST:event_btnSearchActionPerformed
-
+/**
+ * Metoda koja pritiskom dugmeta da se dozvoli da se menja rezervacija poziva metodu da pripremi formu za izmenu rezervacije
+ * @param evt dogadjaj koji je okinuo radnju
+ */
     private void btnChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeActionPerformed
         // TODO add your handling code here:
         prepareChange();
      
     }//GEN-LAST:event_btnChangeActionPerformed
-
+/**
+ * Metoda koja se poziva kada se pritisne dugme za čuvanje izmena rezervacije.
+ *Uzimaju se podaci sa forme
+ * ako broj predstavi koji je naveden se ne poklapa sa brojem stavki izaci ce greska i poruka o gresci
+ * ukoliko jeste sve okej auzurirace se rezervacija
+ * dodaju se i izbacuju stavke u zavisnosti od stanja na tabeli i u listama sta je stavljeno u proslim metodama
+ * ispisace se poruka o uspesnosti ili neuspesnosti akcije
+ * @param evt Događaj akcije
+ */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         try {
@@ -493,7 +556,13 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
                 }
       
     }//GEN-LAST:event_btnSaveActionPerformed
-
+/**
+ * Metoda koja se poziva kada se pritisne dugme za brisanje rezervacije.
+ *Pita se korisnik da li je siguran
+ * ukoliko je odgovor da brisu se sve stavke i karte koje su vezane za rezervaciju
+ * i ispisace se poruka o uspesnosti
+ * @param evt Događaj akcije
+ */
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
          int br=JOptionPane.showConfirmDialog(this, "Are you sure you want to delete a reservation, potentially deleting tickets for reservation.","WARNING",JOptionPane.YES_NO_OPTION);
@@ -517,106 +586,249 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
         }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-
+/**
+ * Metoda koja vraća JTextField komponentu za ID rezervacije.
+ *
+ * @return JTextField komponenta za ID rezervacije
+ */
     public JTextField getTxtRezervacijaId() {
         return txtInvoiceId;
     }
-
+/**
+ * Metoda koja vraća JLabel komponentu za ID rezervacije.
+ *
+ * @return JLabel komponenta za ID rezervacije
+ */
     public JLabel getLblRezervacijaId() {
         return lblInvoiceId;
     }
+    /**
+ * Metoda koja vraća JLabel komponentu za broj predstava.
+ *
+ * @return JLabel komponenta za broj predstava
+ */
     public JLabel getLblNumberOfShow() {
         return lblNumberOfShow;
     }
+    /**
+ * Metoda koja vraća JLabel komponentu za naziv predstave.
+ *
+ * @return JLabel komponenta za naziv predstave
+ */
     public JLabel getLblShow() {
         return lblPredstava;
     }
+    /**
+ * Metoda koja vraća JLabel komponentu za popust.
+ *
+ * @return JLabel komponenta za popust
+ */
      public JLabel getLblDiscount() {
         return lblDiscount;
     }
+     /**
+ * Metoda koja vraća JLabel komponentu za količinu.
+ *
+ * @return JLabel komponenta za količinu
+ */
       public JLabel getLblQuantity() {
         return lblQuantity;
     }
+      /**
+ * Metoda koja vraća JLabel komponentu za praćenje gledanja.
+ *
+ * @return JLabel komponenta za praćenje gledanja
+ */
     public JLabel getLblWatched() {
         return lblWatched;
     }
+    /**
+ * Metoda koja vraća JPanel komponentu za predstavu.
+ *
+ * @return JPanel komponenta za predstavu
+ */
     public JPanel getPanelPredstava(){
         return panelPredstava;
     }
+    /**
+ * Metoda koja vraća JLabel komponentu za klijenta.
+ *
+ * @return JLabel komponenta za klijenta
+ */
      public JLabel getLblClient() {
         return jClient;
     }
+     /**
+ * Metoda koja vraća JLabel komponentu za odabir.
+ *
+ * @return JLabel komponenta za odabir
+ */
      public JLabel getLblChose() {
         return lblChose;
     }
-
+/**
+ * Metoda koja vraća JComboBox komponentu za odabir predstave.
+ *
+ * @return JComboBox komponenta za odabir predstave
+ */
     public JComboBox<Object> getCbPredstava() {
         return cbProduct;
     }
+    /**
+ * Metoda koja vraća JComboBox komponentu za odabir klijenta.
+ *
+ * @return JComboBox komponenta za odabir klijenta
+ */
     public JComboBox<Object> getCbClient() {
         return cbClients;
     }
+    /**
+ * Metoda koja vraća JComboBox komponentu za odabir rezervacije.
+ *
+ * @return JComboBox komponenta za odabir rezervacije
+ */
     public JComboBox<Object> getCbReservations() {
         return cbReservations;
     }
+    /**
+ * Metoda koja vraća JComboBox komponentu za odabir praćenja gledanja.
+ *
+ * @return JComboBox komponenta za odabir praćenja gledanja
+ */
       public JComboBox<String> getCbWatched() {
         return cbWatched;
     }
+      /**
+ * Metoda koja vraća JTable komponentu za prikaz rezervacija.
+ *
+ * @return JTable komponenta za prikaz rezervacija
+ */
 
     public JTable getTblRezervacija() {
         return tblInvoice;
     }
-
+/**
+ * Metoda koja vraća JLabel komponentu za broj predstava.
+ *
+ * @return JLabel komponenta za broj predstava
+ */
    public JLabel getNumberOfShows(){
        return lblNumberOfShow;
    }
+   /**
+ * Metoda koja vraća JButton komponentu za pretragu rezervacija.
+ *
+ * @return JButton komponenta za pretragu rezervacija
+ */
    public JButton getBtnSearch (){
        return btnSearch;
    }
+   /**
+ * Metoda koja vraća JButton komponentu za odabir rezervacije.
+ *
+ * @return JButton komponenta za odabir rezervacije
+ */
    public JButton getBtnChoose(){
        return btnChose;
    }
+   /**
+ * Metoda koja vraća JButton komponentu za uklanjanje stavke rezervacije.
+ *
+ * @return JButton komponenta za uklanjanje stavke rezervacije
+ */
    public JButton getBtnRemove(){
        return btnRemoveInvoiceItem;
    }
+   /**
+ * Metoda koja vraća JButton komponentu za dodavanje stavki u rezervaciju.
+ *
+ * @return JButton komponenta za dodavanje stavki u rezervaciju
+ */
    public JButton getBtnAddProduct(){
        return btnAddProduct;
    }
+   /**
+ * Metoda koja vraća JButton komponentu za brisanje rezervacije.
+ *
+ * @return JButton komponenta za brisanje rezervacije
+ */
     public JButton getBtnDelete(){
        return btnDelete;
    }
+    /**
+ * Metoda koja vraća JButton komponentu za čuvanje rezervacije.
+ *
+ * @return JButton komponenta za čuvanje rezervacije
+ */
     public JButton getBtnSave(){
        return btnSave;
    }
+    /**
+ * Metoda koja vraća JButton komponentu za promenu rezervacije.
+ *
+ * @return JButton komponenta za promenu rezervacije
+ */
+
     public JButton getBtnChange(){
        return btnChange;
    }
+    /**
+ * Metoda koja vraća JTextField komponentu za broj rezervacije.
+ *
+ * @return JTextField komponenta za broj rezervacije
+ */
     public JTextField getTxtInvoiceNumber() {
         return txtInvoiceNumber;
     }
+    /**
+ * Metoda koja vraća JTextField komponentu za identifikator rezervacije.
+ *
+ * @return JTextField komponenta za identifikator rezervacije
+ */
      public JTextField getTxtInvoiceId() {
         return txtInvoiceId;
     }
+     /**
+ * Metoda koja vraća JScrollPane komponentu za prikaz rezervacija.
+ *
+ * @return JScrollPane komponenta za prikaz rezervacija
+ */
       public JScrollPane getScrol() {
         return jScrollPane1;
     }
 
   
     
- 
-
+ /**
+ * Metoda koja vraća JTextField komponentu za popust.
+ *
+ * @return JTextField komponenta za popust
+ */
     public JTextField getTxtDiscount() {
         return txtProductPrice;
     }
-
+/**
+ * Metoda koja vraća JTextField komponentu za količinu sedista.
+ *
+ * @return JTextField komponenta za količinu sedista
+ */
     public JTextField getTxtProductQuantity() {
         return txtProductQuantity;
     }
-   
+   /**
+ * Metoda za dodavanje ActionListenera na dugme za dodavanje stavke u rezervaciju.
+ *
+ * @param actionListener ActionListener koji se dodaje na dugme za dodavanje stavke
+ */
+
     public void addBtnAddProductActionListener(ActionListener actionListener) {
         btnAddProduct.addActionListener(actionListener);
     }
-
+/**
+ * Metoda za dodavanje ActionListenera na dugme za uklanjanje stavke rezervacije.
+ *
+ * @param actionListener ActionListener koji se dodaje na dugme za uklanjanje stavke rezervacije
+ */
     public void addBtnRemoveInvoiceItemActionListener(ActionListener actionListener) {
         btnRemoveInvoiceItem.addActionListener(actionListener);
     }
@@ -652,7 +864,11 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
     private javax.swing.JTextField txtProductPrice;
     private javax.swing.JTextField txtProductQuantity;
     // End of variables declaration//GEN-END:variables
-
+/**
+ * Metoda koja priprema prikaz forme za rezervaciju.
+ * Postavlja modele ComboBox komponenti za izbor predstave i klijenta.
+ * Takođe, popunjava tabelu sa rezervacijama.
+ */
     private void prepareView() {
         try {
             getCbPredstava().setModel(new DefaultComboBoxModel(getProducts().toArray()));
@@ -663,9 +879,42 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
             Logger.getLogger(FrmPretragaRezervacija.class.getName()).log(Level.SEVERE, null, ex);
         }
         prepare();
-        fillTblInvoice();
+        
 
     }
+    /**
+ * Priprema vidljivost komponenti na korisničkom interfejsu.
+ * Postavlja vidljivost određenih komponenti na true ili false u skladu sa postavkama.
+ * Vidljive komponente:
+ * - getCbClient() - ComboBox za izbor klijenta
+ * - getLblClient() - Labela za prikaz teksta "Klijent"
+ * - getBtnSearch() - Dugme za pretragu rezervacija
+ *
+ * Nevidljive komponente:
+ * - getLblChose() - Labela za prikaz teksta "Izaberite rezervaciju"
+ * - getTxtInvoiceId() - Tekstualno polje za prikaz ID rezervacije
+ * - getLblRezervacijaId() - Labela za prikaz teksta "ID rezervacije"
+ * - getLblNumberOfShow() - Labela za prikaz teksta "Broj predstave"
+ * - getTxtInvoiceNumber() - Tekstualno polje za prikaz broja predstave
+ * - getCbReservations() - ComboBox za izbor rezervacije
+ * - getBtnChoose() - Dugme za izbor rezervacije
+ * - getScrol() - Scroll panel
+ * - getTblRezervacija() - Tabela za prikaz rezervacija
+ * - getBtnRemove() - Dugme za uklanjanje stavke rezervacije
+ * - getPanelPredstava() - Panel za prikaz predstave
+ * - getCbPredstava() - ComboBox za izbor predstave
+ * - getLblShow() - Labela za prikaz teksta "Predstava"
+ * - getBtnAddProduct() - Dugme za dodavanje stavke rezervacije
+ * - getLblDiscount() - Labela za prikaz teksta "Popust"
+ * - getTxtDiscount() - Tekstualno polje za unos popusta
+ * - getLblQuantity() - Labela za prikaz teksta "Količina"
+ * - getTxtProductQuantity() - Tekstualno polje za unos količine
+ * - getLblWatched() - Labela za prikaz teksta "Gledano"
+ * - getCbWatched() - ComboBox za izbor opcije "Gledano"
+ * - getBtnChange() - Dugme za izmenu rezervacije
+ * - getBtnDelete() - Dugme za brisanje rezervacije
+ * - getBtnSave() - Dugme za čuvanje rezervacije
+ */
     private void prepare() {
       getLblChose().setVisible(false);
       getTxtInvoiceId().setVisible(false);
@@ -698,6 +947,39 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
       getBtnDelete().setVisible(false);   
       getBtnSave().setVisible(false);
     }
+    /**
+ * Priprema vidljivost komponenti na korisničkom interfejsu za izbor rezervacije.
+ * Postavlja vidljivost određenih komponenti na true ili false u skladu sa postavkama.
+ * Vidljive komponente:
+ * - getLblChose() - Labela za prikaz teksta "Izaberite rezervaciju"
+ * - getCbClient() - ComboBox za izbor klijenta
+ * - getLblClient() - Labela za prikaz teksta "Klijent"
+ * - getBtnSearch() - Dugme za pretragu rezervacija
+ * - getCbReservations() - ComboBox za izbor rezervacije
+ * - getBtnChoose() - Dugme za izbor rezervacije
+ *
+ * Nevidljive komponente:
+ * - getTxtInvoiceId() - Tekstualno polje za prikaz ID rezervacije
+ * - getLblRezervacijaId() - Labela za prikaz teksta "ID rezervacije"
+ * - getLblNumberOfShow() - Labela za prikaz teksta "Broj predstave"
+ * - getTxtInvoiceNumber() - Tekstualno polje za prikaz broja predstave
+ * - getScrol() - Scroll panel
+ * - getTblRezervacija() - Tabela za prikaz rezervacija
+ * - getBtnRemove() - Dugme za uklanjanje stavke rezervacije
+ * - getPanelPredstava() - Panel za prikaz predstave
+ * - getCbPredstava() - ComboBox za izbor predstave
+ * - getLblShow() - Labela za prikaz teksta "Predstava"
+ * - getBtnAddProduct() - Dugme za dodavanje stavke rezervacije
+ * - getLblDiscount() - Labela za prikaz teksta "Popust"
+ * - getTxtDiscount() - Tekstualno polje za unos popusta
+ * - getLblQuantity() - Labela za prikaz teksta "Količina"
+ * - getTxtProductQuantity() - Tekstualno polje za unos količine
+ * - getLblWatched() - Labela za prikaz teksta "Gledano"
+ * - getCbWatched() - ComboBox za izbor opcije "Gledano"
+ * - getBtnChange() - Dugme za izmenu rezervacije
+ * - getBtnDelete() - Dugme za brisanje rezervacije
+ * - getBtnSave() - Dugme za čuvanje rezervacije
+ */
     private void prepareForChoose() {
       getLblChose().setVisible(true);
       getTxtInvoiceId().setVisible(false);
@@ -730,6 +1012,39 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
       getBtnDelete().setVisible(false);   
       getBtnSave().setVisible(false);
     }
+    /**
+ * Priprema vidljivost komponenti na korisničkom interfejsu za izmenu i brisanje rezervacije.
+ * Postavlja vidljivost određenih komponenti na true ili false u skladu sa postavkama.
+ * Vidljive komponente:
+ * - getLblNumberOfShow() - Labela za prikaz teksta "Broj predstave"
+ * - getTxtInvoiceNumber() - Tekstualno polje za prikaz broja predstave
+ * - getCbClient() - ComboBox za izbor klijenta
+ * - getLblClient() - Labela za prikaz teksta "Klijent"
+ * - getBtnSearch() - Dugme za pretragu rezervacija
+ * - getCbReservations() - ComboBox za izbor rezervacije
+ * - getBtnChoose() - Dugme za izbor rezervacije
+ * - getScrol() - Scroll panel
+ * - getTblRezervacija() - Tabela za prikaz rezervacija
+ * - getBtnChange() - Dugme za izmenu rezervacije
+ * - getBtnDelete() - Dugme za brisanje rezervacije
+ *
+ * Nevidljive komponente:
+ * - getTxtInvoiceId() - Tekstualno polje za prikaz ID rezervacije
+ * - getLblRezervacijaId() - Labela za prikaz teksta "ID rezervacije"
+ * - getPanelPredstava() - Panel za prikaz predstave
+ * - getCbPredstava() - ComboBox za izbor predstave
+ * - getLblShow() - Labela za prikaz teksta "Predstava"
+ * - getBtnAddProduct() - Dugme za dodavanje stavke rezervacije
+ * - getLblDiscount() - Labela za prikaz teksta "Popust"
+ * - getTxtDiscount() - Tekstualno polje za unos popusta
+ * - getLblQuantity() - Labela za prikaz teksta "Količina"
+ * - getTxtProductQuantity() - Tekstualno polje za unos količine
+ * - getLblWatched() - Labela za prikaz teksta "Gledano"
+ * - getCbWatched() - ComboBox za izbor opcije "Gledano"
+ * - getBtnRemove() - Dugme za uklanjanje stavke rezervacije
+ * - getBtnSave() - Dugme za čuvanje rezervacije
+ */
+
      private void prepareForChangeDelete() {
       getTxtInvoiceId().setVisible(false);
       getLblRezervacijaId().setVisible(false);
@@ -761,6 +1076,38 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
       getBtnDelete().setVisible(true);
       getBtnSave().setVisible(false);
     }
+     /**
+ * Priprema vidljivost komponenti na korisničkom interfejsu za izmenu rezervacije.
+ * Postavlja vidljivost određenih komponenti na true ili false u skladu sa postavkama.
+ * Vidljive komponente:
+ * - getLblNumberOfShow() - Labela za prikaz teksta "Broj predstave"
+ * - getTxtInvoiceNumber() - Tekstualno polje za prikaz broja predstave
+ * - getCbClient() - ComboBox za izbor klijenta
+ * - getLblClient() - Labela za prikaz teksta "Klijent"
+ * - getCbReservations() - ComboBox za izbor rezervacije
+ * - getBtnChoose() - Dugme za izbor rezervacije
+ * - getTblRezervacija() - Tabela za prikaz rezervacija
+ * - getBtnRemove() - Dugme za uklanjanje stavke rezervacije
+ * - getPanelPredstava() - Panel za prikaz predstave
+ * - getCbPredstava() - ComboBox za izbor predstave
+ * - getLblShow() - Labela za prikaz teksta "Predstava"
+ * - getBtnAddProduct() - Dugme za dodavanje stavke rezervacije
+ * - getLblDiscount() - Labela za prikaz teksta "Popust"
+ * - getTxtDiscount() - Tekstualno polje za unos popusta
+ * - getLblQuantity() - Labela za prikaz teksta "Količina"
+ * - getTxtProductQuantity() - Tekstualno polje za unos količine
+ * - getLblWatched() - Labela za prikaz teksta "Gledano"
+ * - getCbWatched() - ComboBox za izbor opcije "Gledano"
+ * - getBtnSave() - Dugme za čuvanje rezervacije
+ *
+ * Nevidljive komponente:
+ * - getTxtInvoiceId() - Tekstualno polje za prikaz ID rezervacije
+ * - getLblRezervacijaId() - Labela za prikaz teksta "ID rezervacije"
+ * - getBtnSearch() - Dugme za pretragu rezervacija
+ * - getBtnChange() - Dugme za izmenu rezervacije
+ * - getBtnDelete() - Dugme za brisanje rezervacije
+ */
+
      private void prepareChange() {
       getTxtInvoiceId().setVisible(false);
       getLblRezervacijaId().setVisible(false);
@@ -795,67 +1142,67 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
      
     }
 
-    private void fillTblInvoice() {
-       
-    }
-
+    
+/**
+ * Vraća listu predstava.
+ *
+ * @return Lista predstava.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */
     private List<Predstava> getProducts() throws Exception {
         return Communication.getInstance().getAllProducts();
     }
+   /**
+ * Vraća listu klijenata.
+ *
+ * @return Lista klijenata.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */ 
   private List<Klijent> getClients() throws Exception {
         return Communication.getInstance().getAllClients();
     }
+  /**
+ * Vraća listu rezervacija.
+ *
+ * @return Lista rezervacija.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */
    private List<Rezervacija> getReservations() throws Exception {
         return Communication.getInstance().getAllReservations();
     }
-    private void addInvoice(Rezervacija invoice) throws Exception {
-        Communication.getInstance().addRezervacija(invoice);
-    }
+   /**
+ * Ažurira rezervaciju.
+ *
+ * @param invoice Rezervacija koja se ažurira.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */
     private void updateInvoice(Rezervacija invoice) throws Exception {
         Communication.getInstance().updateRezervacija(invoice);
     }
+    /**
+ * Vraća listu stavki rezervacija.
+ *
+ * @return Lista stavki rezervacija.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */
      private List<StavkaRezervacije> getStavke() throws Exception {
          return Communication.getInstance().getAllItemReservations();
     }
+     /**
+ * Vraća listu karata.
+ *
+ * @return Lista karata.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */
+
       private List<Karta> getKarte() throws Exception {
          return Communication.getInstance().getAllTickets();
     }
-      private void getBackDifferent(StavkaRezervacije s){
-      
-          zaDodavanje=new ArrayList<>();
-          boolean flag=false;
-          if(!stare.isEmpty()){
-         for(StavkaRezervacije st:stare){
-             if(st.equals(s)){
-                 flag=true;
-                 nista.add(s);
-             }
-         }
-             if(flag==false){
-                 zaDodavanje.add(s);
-             }
-             
-    }else{
-          zaDodavanje.add(s);
-          }
-      }
-            private void getBackDifferentDelete(StavkaRezervacije s){
-         
-
-          boolean flag=false;
-          if(!nista.isEmpty()){
-         for(StavkaRezervacije st:nista){
-             if(st.equals(s)){
-                 flag=true;
-              
-             }
-         }
-             if(flag==false){
-                 zaIzbacivanje.add(s);
-             }
-             
-    }
-      }
+  /**
+ * Dodaje stavku rezervacije u listu "stare".
+ *
+ * @param s Stavka rezervacije koja se dodaje.
+ */
              private void fillIt(StavkaRezervacije s){
          
        
@@ -863,18 +1210,39 @@ public class FrmPretragaRezervacija extends javax.swing.JDialog {
              
     
       }
-
+/**
+ * Ažurira stavku rezervacije.
+ *
+ * @param zaIzmenu Stavka rezervacije koja se ažurira.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */
     private void updateStavka(StavkaRezervacije zaIzmenu) throws Exception {
         Communication.getInstance().updateRezervacija(zaIzmenu);
     }
+    /**
+ * Dodaje stavku rezervacije u listu.
+ *
+ * @param st Stavka rezervacije koja se dodaje.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */
      private void addStavke(StavkaRezervacije st) throws Exception {
          Communication.getInstance().addStavke(st);
     }
-
+/**
+ * Briše stavku rezervacije iz liste.
+ *
+ * @param st Stavka rezervacije koja se briše.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */
     private void deleteStavke(StavkaRezervacije st) throws Exception {
         Communication.getInstance().deleteStavka(st);
     }
-
+/**
+ * Briše kartu.
+ *
+ * @param k Karta koja se briše.
+ * @throws Exception U slučaju greške prilikom komunikacije.
+ */
     private void deleteKarta(Karta k) throws Exception {
         Communication.getInstance().deleteTicket(k);
     }

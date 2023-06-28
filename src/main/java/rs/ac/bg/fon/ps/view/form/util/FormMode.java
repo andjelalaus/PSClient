@@ -6,9 +6,22 @@
 package rs.ac.bg.fon.ps.view.form.util;
 
 /**
- *
- * @author laptop-02
+ *Enum koji ima tri opcije za prikaz forme
+ * @author Andjy
  */
 public enum FormMode {
-    FORM_ADD, FORM_EDIT, FORM_VIEW
+    /**
+     * Prikaz forme u kom su sve vrednosti prazne i unose se rucno
+     * i zatim je moguce sacuvati objekat
+     */
+    FORM_ADD, 
+    /**
+     * Prikaz forme gde sve vrednosti mogu da se menjaju ali ne moze da se doda kao nov objekat
+     * vec kao postojeci izmenjen
+     */
+    FORM_EDIT, 
+    /**
+     * Prikaz forme gde nista ne moze da se menja ali sve moze da se vidi i eventualno obrise objekat
+     */
+    FORM_VIEW
 }

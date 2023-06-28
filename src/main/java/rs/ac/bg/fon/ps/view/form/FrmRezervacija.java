@@ -21,19 +21,25 @@ import rs.ac.bg.fon.ps.PSCommon.communication.Receiver;
 import rs.ac.bg.fon.ps.PSCommon.communication.Request;
 import rs.ac.bg.fon.ps.PSCommon.communication.Response;
 import rs.ac.bg.fon.ps.PSCommon.communication.Sender;
-import rs.ac.bg.fon.ps.domain.Klijent;
-import rs.ac.bg.fon.ps.domain.Predstava;
-import rs.ac.bg.fon.ps.domain.Rezervacija;
-import rs.ac.bg.fon.ps.domain.StavkaRezervacije;
+import rs.ac.bg.fon.ps.PSCommon.domain.Klijent;
+import rs.ac.bg.fon.ps.PSCommon.domain.Predstava;
+import rs.ac.bg.fon.ps.PSCommon.domain.Rezervacija;
+import rs.ac.bg.fon.ps.PSCommon.domain.StavkaRezervacije;
 import rs.ac.bg.fon.ps.view.form.componenet.table.ReservationsTableModel;
-
+/**
+ * Forma za pravljenje nove rezervacije
+ * Moze da se sacuva ili odustane
+ * @author andelalausevic
+ */
 public class FrmRezervacija extends javax.swing.JDialog {
 
-    /**
-     * Creates new form FrmInvoice
-     */
   
-
+/**
+ * Konstruktor klase FrmRezervacija.
+ *
+ * @param parent Roditeljski prozor.
+ * @param modal  Modalnost prozora.
+ */
     public FrmRezervacija(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -249,7 +255,12 @@ public class FrmRezervacija extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Metoda koja se poziva kada korisnik pritisne dugme "Add" za dodavanje stavke u rezervaciju.
+ * moraju da budu popunjeni svi atributi i predstava selektovana
+ * 
+ * @param evt Objekat koji predstavlja događaj pritiska na dugme.
+ */
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         try {
                     Predstava predstava = (Predstava) getCbPredstava().getSelectedItem();
@@ -267,7 +278,11 @@ public class FrmRezervacija extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Invalid predstava data!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
     }//GEN-LAST:event_btnAddProductActionPerformed
-
+/**
+ * Metoda koja se poziva kada korisnik pritisne dugme "Remove" za uklanjanje stavke iz rezervacije.
+ *
+ * @param evt Objekat koji predstavlja događaj pritiska na dugme.
+ */
     private void btnRemoveInvoiceItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveInvoiceItemActionPerformed
         int rowIndex = getTblRezervacija().getSelectedRow();
                 ReservationsTableModel model = (ReservationsTableModel) getTblRezervacija().getModel();
@@ -278,7 +293,12 @@ public class FrmRezervacija extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Rezervacija item is not selected!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
     }//GEN-LAST:event_btnRemoveInvoiceItemActionPerformed
-
+/**
+ * Metoda koja se poziva kada korisnik pritisne dugme "Sačuvaj rezervaciju" za čuvanje rezervacije.
+ *Broj predstavi mora biti jednak stavkama
+ * ispisuje se poruka o uspesnosti
+ * @param evt Objekat koji predstavlja događaj pritiska na dugme.
+ */
     private void btnSaveInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveInvoiceActionPerformed
       try {
                     //DateFormat df = new SimpleDateFormat("dd.MM.yyyy.");
@@ -309,32 +329,63 @@ public class FrmRezervacija extends javax.swing.JDialog {
 
                 }
     }//GEN-LAST:event_btnSaveInvoiceActionPerformed
-
+/**
+ * Metoda koja se poziva kada korisnik pritisne dugme "Sačuvaj proizvod".
+ * NE KORISTI SE
+ * @param evt Objekat koji predstavlja događaj pritiska na dugme.
+ */
     private void btnSaveProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveProduct1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSaveProduct1ActionPerformed
-
+/**
+ * Metoda koja vraća tekstualno polje za unos identifikatora rezervacije.
+ *
+ * @return Tekstualno polje za unos identifikatora rezervacije.
+ */
     public JTextField getTxtRezervacijaId() {
         return txtInvoiceId;
     }
-
+/**
+ * Metoda koja vraća oznaku za identifikator rezervacije.
+ *
+ * @return Oznaka za identifikator rezervacije.
+ */
     public JLabel getLblRezervacijaId() {
         return lblInvoiceId;
     }
+/**
+ * Metoda koja vraća padajući meni za izbor predstave.
+ *
+ * @return Padajući meni za izbor predstave.
+ */
 
     public JComboBox<Object> getCbPredstava() {
         return cbProduct;
     }
+    /**
+ * Metoda koja vraća padajući meni za izbor klijenta.
+ *
+ * @return Padajući meni za izbor klijenta.
+ */
+
         public JComboBox<Object> getCbClient() {
         return cbClients;
     }
-
+/**
+ * Metoda koja vraća tabelu rezervacija.
+ *
+ * @return Tabela rezervacija.
+ */
     public JTable getTblRezervacija() {
         return tblInvoice;
     }
 
    
-
+/**
+ * Metoda koja vraća tekstualno polje za unos broja rezervacije.
+ *
+ * @return Tekstualno polje za unos broja rezervacije.
+ */
     public JTextField getTxtInvoiceNumber() {
         return txtInvoiceNumber;
     }
@@ -342,23 +393,43 @@ public class FrmRezervacija extends javax.swing.JDialog {
   
 
  
-
+/**
+ * Metoda koja vraća tekstualno polje za unos popusta.
+ *
+ * @return Tekstualno polje za unos popusta.
+ */
     public JTextField getTxtDiscount() {
         return txtProductPrice;
     }
-
+/**
+ * Metoda koja vraća tekstualno polje za unos količine sedista.
+ *
+ * @return Tekstualno polje za unos količine sedista.
+ */
     public JTextField getTxtProductQuantity() {
         return txtProductQuantity;
     }
-   
+  /**
+ * Metoda za dodavanje slušaoca događaja na dugme "Dodaj stavku".
+ *
+ * @param actionListener Slušalac događaja.
+ */ 
     public void addBtnAddProductActionListener(ActionListener actionListener) {
         btnAddProduct.addActionListener(actionListener);
     }
-
+/**
+ * Metoda za dodavanje slušaoca događaja na dugme "Ukloni stavku rezervacije".
+ *
+ * @param actionListener Slušalac događaja.
+ */
     public void addBtnRemoveInvoiceItemActionListener(ActionListener actionListener) {
         btnRemoveInvoiceItem.addActionListener(actionListener);
     }
-
+/**
+ * Metoda za dodavanje slušaoca događaja na dugme "Sačuvaj rezervaciju".
+ *
+ * @param actionListener Slušalac događaja.
+ */
     public void addBtnSaveInvoiceActionListener(ActionListener actionListener) {
         btnSaveInvoice.addActionListener(actionListener);
     }
@@ -386,7 +457,10 @@ public class FrmRezervacija extends javax.swing.JDialog {
     private javax.swing.JTextField txtProductPrice;
     private javax.swing.JTextField txtProductQuantity;
     // End of variables declaration//GEN-END:variables
-
+/**
+ * Priprema prikaza forme za rezervaciju.
+ * setuju se combo boxovi za klijenta i predstave
+ */
     private void prepareView() {
         try {
             getCbPredstava().setModel(new DefaultComboBoxModel(getProducts().toArray()));
@@ -400,25 +474,53 @@ public class FrmRezervacija extends javax.swing.JDialog {
         fillTblInvoice();
 
     }
+    /**
+ * Popunjava podrazumevane vrednosti na formi.
+ * za sad prazna
+ */
     private void fillDefaultValues() {
       
     }
-
+/**
+ * Popunjava tabelu rezervacija.
+ */
     private void fillTblInvoice() {
         ReservationsTableModel model = new ReservationsTableModel(new Rezervacija());
         getTblRezervacija().setModel(model);
     }
-
+/**
+ * Metoda koja vraća listu predstava.
+ *
+ * @return Lista predstava.
+ * @throws Exception Ukoliko neuspešno dohvatanje predstava.
+ */
     private List<Predstava> getProducts() throws Exception {
         return Communication.getInstance().getAllProducts();
     }
+    /**
+ * Metoda koja vraća listu klijenata.
+ *
+ * @return Lista klijenata.
+ * @throws Exception Ukoliko neuspešno dohvatanje klijenata.
+ */
   private List<Klijent> getClients() throws Exception {
         return Communication.getInstance().getAllClients();
     }
+  /**
+ * Metoda za dodavanje rezervacije.
+ *
+ * @param invoice Rezervacija koja se dodaje.
+ * @throws Exception Ukoliko neuspešno dodavanje rezervacije.
+ */
     private void addInvoice(Rezervacija invoice) throws Exception {
         Communication.getInstance().addRezervacija(invoice);
     }
-
+/**
+ * Metoda za dodavanje stavke rezervacije.
+ *
+ * @param st Stavka rezervacije koja se dodaje.
+ * @throws Exception Ukoliko neuspešno dodavanje stavke rezervacije.
+ */
     private void addStavke(StavkaRezervacije st) throws Exception {
          Communication.getInstance().addStavke(st);
     }

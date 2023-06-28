@@ -7,8 +7,9 @@ package rs.ac.bg.fon.ps.validator.components;
 import rs.ac.bg.fon.ps.validator.IValidator;
 import rs.ac.bg.fon.ps.validator.ValidatorException;
 /**
- *
- * @author Vuk
+ * Klasa OcenaValidatoror koja implementira interfejs IValidator i njegovu metodu validate
+ * Proverava da li ocena je u formi broja i da nije manji od 1 ili veci od 10
+ * @author Andjy
  */
 public class OcenaValidator implements IValidator{
 

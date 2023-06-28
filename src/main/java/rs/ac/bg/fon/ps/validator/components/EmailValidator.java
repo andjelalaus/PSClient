@@ -10,7 +10,8 @@ import rs.ac.bg.fon.ps.validator.ValidatorException;
 
 
 /**
- *
+ * Klasa EmailValidator koja implementira interfejs IValidator i njegovu metodu validate
+ * Proverava da li imejl je u formi mejla i da nije prazan ili null
  * @author Andjy
  */
 public class EmailValidator implements IValidator{

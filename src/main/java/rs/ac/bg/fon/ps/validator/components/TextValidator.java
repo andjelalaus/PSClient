@@ -8,8 +8,9 @@ import rs.ac.bg.fon.ps.validator.IValidator;
 import rs.ac.bg.fon.ps.validator.ValidatorException;
 
 /**
- *
- * @author Vuk
+ * Klasa TextValidator koja implementira interfejs IValidator i njegovu metodu validate
+ * Proverava da li vrednost nije prazna ili null i da ne sadrzi brojeve i ne prelazi 100 karaktera
+ * @author Andjy
  */
 public class TextValidator implements IValidator{
 
