@@ -5,7 +5,12 @@
  */
 package rs.ac.bg.fon.ps.view.form;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -86,6 +91,12 @@ public class FrmViewTickets extends javax.swing.JDialog {
             }
         });
 
+        cbTickets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTicketsActionPerformed(evt);
+            }
+        });
+
         lblClient.setText("Search by name of client:");
 
         lblTicket.setText("TICKETS:");
@@ -97,7 +108,6 @@ public class FrmViewTickets extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblTicket)
@@ -112,7 +122,8 @@ public class FrmViewTickets extends javax.swing.JDialog {
                                 .addComponent(lblShow)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNameOfShow, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(btnSearch)))
+                        .addComponent(btnSearch))
+                    .addComponent(btnDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -181,7 +192,7 @@ public class FrmViewTickets extends javax.swing.JDialog {
                     ticketsToShow.add(k);
                 }
             }
-             getCbTickets().setModel(new DefaultComboBoxModel(ticketsToShow.toArray()));
+            getCbTickets().setModel(new DefaultComboBoxModel(ticketsToShow.toArray()));
             getCbTickets().setSelectedIndex(-1);
             getCbTickets().setVisible(true);
             
@@ -200,6 +211,10 @@ public class FrmViewTickets extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "ERROR DETAILS", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void cbTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTicketsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTicketsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDetails;
@@ -291,5 +306,6 @@ public class FrmViewTickets extends javax.swing.JDialog {
         
     }
 
-    
+
+
 }

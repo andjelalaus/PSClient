@@ -1,10 +1,16 @@
 package rs.ac.bg.fon.ps.view.form;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.net.Socket;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -321,7 +327,7 @@ public class FrmRezervacija extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(this, "Stavke is not saved! " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                         }
                             }
-                    JOptionPane.showMessageDialog(this, "Rezervacija is saved");
+                    
                     this.dispose();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -466,6 +472,17 @@ public class FrmRezervacija extends javax.swing.JDialog {
             getCbPredstava().setModel(new DefaultComboBoxModel(getProducts().toArray()));
             getCbPredstava().setSelectedIndex(-1);
              getCbClient().setModel(new DefaultComboBoxModel(getClients().toArray()));
+             List<Klijent> klijenti=new ArrayList<>();
+             klijenti=getClients();
+             	try(PrintWriter out = new PrintWriter(new FileWriter("clients.json"))){
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+			
+			out.print(gson.toJson(klijenti));
+                        JOptionPane.showMessageDialog(this,"Napravljen dokument sa svim postojecim klijentima");
+		} catch (IOException e) {
+                    System.out.println("Doslo do greske"+e.getMessage());
+			e.printStackTrace();
+		}
             getCbClient().setSelectedIndex(-1);
         } catch (Exception ex) {
             Logger.getLogger(FrmRezervacija.class.getName()).log(Level.SEVERE, null, ex);

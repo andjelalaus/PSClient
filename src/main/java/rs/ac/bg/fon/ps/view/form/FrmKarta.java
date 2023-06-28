@@ -255,7 +255,7 @@ public class FrmKarta extends javax.swing.JDialog {
             
 
             Communication.getInstance().addKarta(karta);
-            JOptionPane.showMessageDialog(this, "Karta successfully saved.");
+            JOptionPane.showMessageDialog(this, "Karta successfully saved.");        
             this.dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage()+" System can not save ticket","ERROR",JOptionPane.ERROR_MESSAGE);

@@ -1,6 +1,6 @@
 package rs.ac.bg.fon.ps.view.form;
 
-import java.awt.event.ActionListener;
+
 import java.math.BigDecimal;
 import java.net.Socket;
 import java.text.DateFormat;
@@ -279,7 +279,10 @@ public class FrmPlanGledanja extends javax.swing.JDialog {
   
     
  
-
+/**
+ * Metoda koja vraca polje za ocenu
+ * @return polje za ocenu
+ */
     public JTextField getTxtGrade() {
         return txtGrade;
     }
@@ -301,7 +304,10 @@ public class FrmPlanGledanja extends javax.swing.JDialog {
     private javax.swing.JLabel lblWatched;
     private javax.swing.JTextField txtGrade;
     // End of variables declaration//GEN-END:variables
-
+/**
+ * Metoda koja namesta formu za prikaz korisniku.
+ * puni combo box klijentima i predstavama.
+ */
     private void prepareView() {
         try {
             getCbPredstava().setModel(new DefaultComboBoxModel(getProducts().toArray()));
@@ -319,16 +325,29 @@ public class FrmPlanGledanja extends javax.swing.JDialog {
     
 
  
-
+/**
+ * Metoda koja vraca listu predstavi iz baze
+ * @return listu predstavi
+ * @throws Exception ako dodje do greske sa konekcijom
+ */
     private List<Predstava> getProducts() throws Exception {
         return Communication.getInstance().getAllProducts();
     }
+    /**
+     * Metoda koja vraca listu klijenata iz baze
+     * @return listu klijenata
+     * @throws Exception ako dodje do greske sa konekcijom
+     */
   private List<Klijent> getClients() throws Exception {
         return Communication.getInstance().getAllClients();
     }
 
 
-
+/**
+ * Metoda za cuvanje plana gledanja u bazi
+ * @param pl plangledanja koji treba da se sacuva
+ * @throws Exception koji se baca ako dodje do greske
+ */
     private void savePlan(PlanGledanja pl) throws Exception {
          Communication.getInstance().savePlan(pl);
     }

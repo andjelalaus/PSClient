@@ -1,0 +1,79 @@
+[
+  {
+    "klijentId": 1,
+    "ime": "Andjy",
+    "prezime": "Banana",
+    "email": "ad@gmail.com",
+    "status": "redovan"
+  },
+  {
+    "klijentId": 2,
+    "ime": "Pavle",
+    "prezime": "Maljkovic",
+    "email": "aa@bb",
+    "status": "redovan"
+  },
+  {
+    "klijentId": 3,
+    "ime": "Srecko",
+    "prezime": "Mirkovic",
+    "email": "mir@gg.com",
+    "status": "povremen"
+  },
+  {
+    "klijentId": 4,
+    "ime": "Marko",
+    "prezime": "Malic",
+    "email": "aa@g.com",
+    "status": "redovan"
+  },
+  {
+    "klijentId": 5,
+    "ime": "Vuk",
+    "prezime": "Manojlovic",
+    "email": "vukman@gmail.com",
+    "status": "student"
+  },
+  {
+    "klijentId": 6,
+    "ime": "Marija",
+    "prezime": "Micic",
+    "email": "ma@gmail.com",
+    "status": "penzioner"
+  },
+  {
+    "klijentId": 7,
+    "ime": "Mileva",
+    "prezime": "Maric",
+    "email": "mileva@gmail.com",
+    "status": "penzioner"
+  },
+  {
+    "klijentId": 8,
+    "ime": "Pera",
+    "prezime": "Perica",
+    "email": "pera@gmail.com",
+    "status": "redovan"
+  },
+  {
+    "klijentId": 9,
+    "ime": "Dunja",
+    "prezime": "Lausevic",
+    "email": "dunja@gmail",
+    "status": "student"
+  },
+  {
+    "klijentId": 10,
+    "ime": "Stefan",
+    "prezime": "Dobras",
+    "email": "st@gmail.com",
+    "status": "redovan"
+  },
+  {
+    "klijentId": 11,
+    "ime": "Andjela",
+    "prezime": "Lausevic",
+    "email": "aa@gg.com",
+    "status": "student"
+  }
+]
