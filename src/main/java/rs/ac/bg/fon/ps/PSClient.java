@@ -4,8 +4,7 @@
  */
 package rs.ac.bg.fon.ps;
 
-import java.net.Socket;
-import rs.ac.bg.fon.ps.PSCommon.domain.Karta;
+
 import rs.ac.bg.fon.ps.view.form.FrmLogin;
 
 /**

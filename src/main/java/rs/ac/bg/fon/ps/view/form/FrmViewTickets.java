@@ -5,30 +5,18 @@
  */
 package rs.ac.bg.fon.ps.view.form;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import rs.ac.bg.fon.ps.communication.Communication;
 import rs.ac.bg.fon.ps.communication.LocalStorage;
 import rs.ac.bg.fon.ps.PSCommon.domain.Karta;
-import rs.ac.bg.fon.ps.PSCommon.domain.Predstava;
-import rs.ac.bg.fon.ps.PSCommon.domain.Rezervacija;
-import rs.ac.bg.fon.ps.view.form.componenet.table.ShowsTableModel;
 import rs.ac.bg.fon.ps.view.form.util.FormMode;
 
 /**

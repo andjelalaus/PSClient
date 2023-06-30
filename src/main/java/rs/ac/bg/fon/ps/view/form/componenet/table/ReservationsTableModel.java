@@ -5,7 +5,7 @@
  */
 package rs.ac.bg.fon.ps.view.form.componenet.table;
 
-import java.math.BigDecimal;
+
 import javax.swing.table.AbstractTableModel;
 import rs.ac.bg.fon.ps.PSCommon.domain.Predstava;
 import rs.ac.bg.fon.ps.PSCommon.domain.StavkaRezervacije;

@@ -6,30 +6,14 @@
 package rs.ac.bg.fon.ps.view.form;
 
 import java.awt.event.ActionListener;
-import java.math.BigDecimal;
-import java.net.Socket;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import rs.ac.bg.fon.ps.communication.Communication;
-import rs.ac.bg.fon.ps.PSCommon.communication.Operation;
-import rs.ac.bg.fon.ps.PSCommon.communication.Receiver;
-import rs.ac.bg.fon.ps.PSCommon.communication.Request;
-import rs.ac.bg.fon.ps.PSCommon.communication.Response;
-import rs.ac.bg.fon.ps.PSCommon.communication.Sender;
 import rs.ac.bg.fon.ps.PSCommon.domain.Klijent;
-import rs.ac.bg.fon.ps.PSCommon.domain.PlanGledanja;
-//import rs.ac.bg.fon.ps.domain.MeasurementUnit;
-import rs.ac.bg.fon.ps.PSCommon.domain.Rezervacija;
 import rs.ac.bg.fon.ps.view.form.util.FormMode;
 
 /**

@@ -4,9 +4,9 @@
  */
 package rs.ac.bg.fon.ps.communication;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
-import java.util.List;
+
 
 /**
  *Klasa za cuvanje hashmapa

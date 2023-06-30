@@ -10,7 +10,6 @@ import rs.ac.bg.fon.ps.PSCommon.communication.Response;
 import rs.ac.bg.fon.ps.PSCommon.communication.Receiver;
 import rs.ac.bg.fon.ps.PSCommon.communication.Request;
 import rs.ac.bg.fon.ps.PSCommon.communication.Sender;
-import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
 import rs.ac.bg.fon.ps.PSCommon.domain.Karta;

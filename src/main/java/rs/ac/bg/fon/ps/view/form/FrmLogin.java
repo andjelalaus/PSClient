@@ -1,19 +1,9 @@
 package rs.ac.bg.fon.ps.view.form;
 
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import rs.ac.bg.fon.ps.communication.Communication;
-import rs.ac.bg.fon.ps.PSCommon.communication.Operation;
-import rs.ac.bg.fon.ps.PSCommon.communication.Receiver;
-import rs.ac.bg.fon.ps.PSCommon.communication.Request;
-import rs.ac.bg.fon.ps.PSCommon.communication.Response;
-import rs.ac.bg.fon.ps.PSCommon.communication.Sender;
-import rs.ac.bg.fon.ps.PSCommon.domain.Klijent;
 import rs.ac.bg.fon.ps.PSCommon.domain.User;
 /**
  * FOrma koja predstavlja prijavnu formu
