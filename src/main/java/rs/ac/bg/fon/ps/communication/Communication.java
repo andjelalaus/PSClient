@@ -22,7 +22,7 @@ import rs.ac.bg.fon.ps.PSCommon.domain.User;
 
 
 /**
- * Klasa za komunikaciju koja ima i Seeder i Receiver
+ * Klasa za komunikaciju koja ima i Sender i Receiver
  * znaci i salje i prima podatke od servera
  * uspostavlja komunikaciju sa serverom
  * i ima login metodu za korisnika
@@ -39,7 +39,7 @@ public class Communication {
      */
     Sender sender;
     /**
-     * receiver objekat klase Receiver koji sluzi za priamanje objekata
+     * receiver objekat klase Receiver koji sluzi za primanje objekata
      */
     Receiver receiver;
     /**
@@ -71,7 +71,7 @@ public class Communication {
     /**
      * Metoda za prijavu korisnika
      * setuju se prosledjeni parametri salje se zahtev servisu za logovanje sa napravljenim userom
-     * uzima se odgovor i gleda da li ima exception ukoliko nema prijavljuje se
+     * uzima se odgovor i gleda da li ima exception ukoliko nema prijavljuje se user
      * ukoliko ima ispisuje se greska
      * @param username parametar koji predstavlja korisnicko ime
      * @param password predstavlja lozinku korisnika
@@ -165,7 +165,7 @@ public class Communication {
     }
  /**
      * Metoda za dodavanje predstave
-     * salje se zahtev servisu za add predstava sa predstavom za dodadvanje
+     * salje se zahtev servisu za add predstava sa predstavom za dodavanje
      * uzima se odgovor i gleda da li ima exception ukoliko nema ne vraca se nista
      * ukoliko ima ispisuje se greska
      * @param predstava je predstava koju zelimo da dodamo
@@ -183,7 +183,7 @@ public class Communication {
     }
      /**
      * Metoda za dodavanje klijenta
-     * salje se zahtev servisu za add klijent sa klijentom za dodadvanje
+     * salje se zahtev servisu za add klijent sa klijentom za dodavanje
      * uzima se odgovor i gleda da li ima exception ukoliko nema ne vraca se nista
      * ukoliko ima ispisuje se greska
      * @param klijent je klijent koju zelimo da dodamo
